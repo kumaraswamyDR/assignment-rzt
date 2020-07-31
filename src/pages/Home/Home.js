@@ -11,16 +11,13 @@ export default function Home() {
 
   const dispatch = useDispatch();
   let location = useLocation();
-  const { mediaFiles, currentPage,loading,errorMessage } = useSelector((state) => state);
+  const { mediaFiles, currentPage, loading, errorMessage } = useSelector(
+    (state) => state
+  );
 
   useEffect(() => {
     dispatch(getMediaFiles({ query: queryText, currentPage: currentPage }));
   }, []);
-
-
-    useEffect(() => {
-        console.log("",loading,errorMessage)
-    }, );
 
   const onSearch = (queryText) => {
     dispatch(getMediaFiles({ query: queryText, currentPage: 1 }));
@@ -36,22 +33,27 @@ export default function Home() {
       <div className={styles.searchBarContainer}>
         <SearchBar onSearch={onSearch} />
       </div>
-      <div className={styles.row}>
-        {mediaFiles &&
-          mediaFiles.length > 0 &&
-          mediaFiles.map((media) => {
-            return (
-              <div key={media.id} className={styles.mediaLayout}>
-                <ImageListItem media={media} location={location} />
-              </div>
-            );
-          })}
-      </div>
-        {loading && <p>Loading...</p>}
-        {loading && <p>{errorMessage}</p>}
-      <button onClick={loadMore} className={styles.loadMore}>
-        Load more
-      </button>
+      {errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : (
+        <div className={styles.row}>
+          {mediaFiles &&
+            mediaFiles.length > 0 &&
+            mediaFiles.map((media) => {
+              return (
+                <div key={media.id} className={styles.mediaLayout}>
+                  <ImageListItem media={media} location={location} />
+                </div>
+              );
+            })}
+        </div>
+      )}
+      {loading && !errorMessage && <p>Loading...</p>}
+      {!errorMessage && (
+        <button onClick={loadMore} className={styles.loadMore}>
+          Load more
+        </button>
+      )}
     </div>
   );
 }

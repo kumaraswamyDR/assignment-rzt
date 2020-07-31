@@ -3,13 +3,13 @@ import {
   GET_MEDIA_FILES,
   GET_MEDIA_FILES_FAILURE,
   GET_MEDIA_FILES_SUCCESS,
-  MEDIA_FILES_LOADING
+  MEDIA_FILES_LOADING,
 } from "../actions/constants";
 import { getMediaFilesService } from "../services";
 
 function* getMediaFiles(action) {
   try {
-    yield put({type:MEDIA_FILES_LOADING});
+    yield put({ type: MEDIA_FILES_LOADING });
     const response = yield call(getMediaFilesService, action.payload);
     if (!action.payload.query) {
       yield put({
@@ -27,7 +27,7 @@ function* getMediaFiles(action) {
       });
     }
   } catch (error) {
-    yield put({ type: GET_MEDIA_FILES_FAILURE, errorMessage:error});
+    yield put({ type: GET_MEDIA_FILES_FAILURE, errorMessage: error });
   }
 }
 
