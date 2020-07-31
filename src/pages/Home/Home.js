@@ -36,23 +36,24 @@ export default function Home() {
       {errorMessage ? (
         <p>{errorMessage}</p>
       ) : (
-        <div className={styles.row}>
-          {mediaFiles &&
-            mediaFiles.length > 0 &&
-            mediaFiles.map((media) => {
-              return (
-                <div key={media.id} className={styles.mediaLayout}>
-                  <ImageListItem media={media} location={location} />
-                </div>
-              );
-            })}
+        <div>
+          <div className={styles.row}>
+            {mediaFiles &&
+              mediaFiles.length > 0 &&
+              mediaFiles.map((media) => {
+                return (
+                  <div key={media.id} className={styles.mediaLayout}>
+                    <ImageListItem media={media} location={location} />
+                  </div>
+                );
+              })}
+          </div>
+          {loading && <p>Loading...</p>}
+
+            <button onClick={loadMore} className={styles.loadMore}>
+              Load more
+            </button>
         </div>
-      )}
-      {loading && !errorMessage && <p>Loading...</p>}
-      {!errorMessage && (
-        <button onClick={loadMore} className={styles.loadMore}>
-          Load more
-        </button>
       )}
     </div>
   );
