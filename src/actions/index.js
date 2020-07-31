@@ -1,8 +1,8 @@
-import {GET_MEDIA_FILES} from "./constants";
+import { GET_MEDIA_FILES } from "./constants";
 
 export function getMediaFiles(payload) {
-    return {
-        type: GET_MEDIA_FILES,
-        payload: payload
-    }
+  return {
+    type: GET_MEDIA_FILES,
+    payload: payload,
+  };
 }
