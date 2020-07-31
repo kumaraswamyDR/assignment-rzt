@@ -8,7 +8,7 @@ import {
 const initialState = {
   mediaFiles: [],
   currentPage: 1,
-  error:"",
+  errorMessage:"",
   loading:false,
 };
 

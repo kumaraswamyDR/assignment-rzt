@@ -11,11 +11,16 @@ export default function Home() {
 
   const dispatch = useDispatch();
   let location = useLocation();
-  const { mediaFiles, currentPage } = useSelector((state) => state);
+  const { mediaFiles, currentPage,loading,errorMessage } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(getMediaFiles({ query: queryText, currentPage: currentPage }));
   }, []);
+
+
+    useEffect(() => {
+        console.log("",loading,errorMessage)
+    }, );
 
   const onSearch = (queryText) => {
     dispatch(getMediaFiles({ query: queryText, currentPage: 1 }));
@@ -42,6 +47,8 @@ export default function Home() {
             );
           })}
       </div>
+        {loading && <p>Loading...</p>}
+        {loading && <p>{errorMessage}</p>}
       <button onClick={loadMore} className={styles.loadMore}>
         Load more
       </button>

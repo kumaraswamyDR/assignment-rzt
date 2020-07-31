@@ -1,9 +1,15 @@
 import { call, put, all, takeEvery, takeLatest } from "redux-saga/effects";
-import {GET_MEDIA_FILES, GET_MEDIA_FILES_FAILURE, GET_MEDIA_FILES_SUCCESS} from "../actions/constants";
+import {
+  GET_MEDIA_FILES,
+  GET_MEDIA_FILES_FAILURE,
+  GET_MEDIA_FILES_SUCCESS,
+  MEDIA_FILES_LOADING
+} from "../actions/constants";
 import { getMediaFilesService } from "../services";
 
 function* getMediaFiles(action) {
   try {
+    yield put({type:MEDIA_FILES_LOADING});
     const response = yield call(getMediaFilesService, action.payload);
     if (!action.payload.query) {
       yield put({
